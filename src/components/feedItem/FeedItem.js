@@ -41,10 +41,10 @@ export const FeedItem = ({feedItem, index}) => {
       <div>
         <img className = "feedItemImg" src={isTherePicture()}/>
       </div>
-      <div>
+      <div className="infoContainer">
         <p>{feedItem.author}</p>
         <p>{date()}</p>
-        <p onClick={toggleComments}>{feedItem.num_comments}</p>
+        <a className="comments" onClick={toggleComments}>{feedItem.num_comments} comment(s)</a>
       </div>
       </div>
   )

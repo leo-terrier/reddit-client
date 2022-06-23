@@ -5,8 +5,8 @@ import {SearchBar} from "../searchBar/SearchBar.js"
 export function Header () {
 ///Header is made of one logo on the left, and a search bar
 return (
-    <div>
-      <img src="logo"/>
+    <div id="headerDiv">
+      <img id='logo' src={require("../../img/reddit.jpeg")}/>
       <SearchBar />
     </div>
 )

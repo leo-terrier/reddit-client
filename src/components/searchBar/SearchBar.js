@@ -29,8 +29,8 @@ return (
         onChange={handleChange}>
         </input>
 
-        <button type="submit">
-          <img src="magnifyer" />
+        <button type="submit" id="searchButton">
+          <img src={require("../../img/search2.png")} id="searchButtonImg" />
         </button>
 
       </form>
