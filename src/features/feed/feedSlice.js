@@ -3,10 +3,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const loadSpecificSubreddit = createAsyncThunk(
   'feed/loadSpecificSubreddit',
-  async () => {
-    const data = await fetch(`https://www.reddit.com/r/pics.json`);
+  async (subreddit, thunkAPI) => {
+    const data = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
     const json = await data.json();
-    console.log(json)
     return json;
   }
 );
@@ -17,6 +16,7 @@ export const generateFeedFromSearch = createAsyncThunk(
     searchTerm = searchTerm.replaceAll(' ', '%20')
     const data = await fetch(`https://www.reddit.com/search.json?q=${searchTerm}`);
     const json = await data.json();
+    console.log(json)
     return json;
   }
 );
@@ -26,10 +26,10 @@ const options = {
   initialState: {
     isFeedPending: false,
     failedToLoadFeed: false,
-    feed: []
+    feed: [],
   },
  
-  extrareducers: {
+  extraReducers: {
     [loadSpecificSubreddit.pending] : (state, action) => {
       state.isFeedPending= true;
       state.failedToLoadFeed= false;
@@ -45,6 +45,14 @@ const options = {
     },
     [generateFeedFromSearch.fulfilled] : (state, action) => {
       state.feed = action.payload.data.children.map((child) => child.data )
+    },
+    [generateFeedFromSearch.pending] : (state, action) => {
+      state.isFeedPending= true;
+      state.failedToLoadFeed= false;
+    },
+    [generateFeedFromSearch.rejected] : (state, action) => {
+      state.isFeedPending= false;
+      state.failedToLoadFeed= true;
     },
   
   }

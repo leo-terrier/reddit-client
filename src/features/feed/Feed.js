@@ -19,6 +19,7 @@ export const Feed = () => {
   ///on first render, get initial feed from r/pics subreddit 
    useEffect(() => {
     dispatch(loadSpecificSubreddit("pics"));
+    console.log(feed)
   }, [dispatch] ); 
 
   const generateFeed = feed.map((feedItem) => (

@@ -1,8 +1,14 @@
 export const Comment = ({index, comment}) => {
   ///find exact property name
+
+  const date = () => {
+    const newDate = new Date(comment.created_utc)
+    return newDate.toUTCString()
+  }
+
   return <li key={index}> 
   <div>
-    <p>{comment.created_utc.toUTCString()}</p>
+    <p>{date()}</p>
     <p>{comment.author}</p>
   </div>
   {comment.body}

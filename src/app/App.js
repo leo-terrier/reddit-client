@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div>
+      <div id="mainContainer">
         <Feed />
         <Subreddit />
       </div>

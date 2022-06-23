@@ -44,6 +44,10 @@ export function Subreddit() {
   subreddits.map((subredditItem, index) => <SubredditItem subredditItem={subredditItem} index={index}/>)
   
 
-  return <ul>{generateSubredditList}</ul>
+  return (
+    <div>
+      <h2>Subreddits</h2>
+      <ul id="side">{generateSubredditList}</ul>
+    </div>)
     
 }

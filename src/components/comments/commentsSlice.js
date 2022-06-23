@@ -12,23 +12,37 @@ export const loadComments = createAsyncThunk(
 
 const options = {
   name:"comments",
-  initialState:[],
+  initialState:{
+    areCommentsLoading: false,
+    failedToLoadComments: false,
+    comments: []
+  },
   reducers : {
     clearComments : (state) => {
       state.comments = []
     }
 
   }, 
-  extrareducers: {
+  extraReducers: {
+    [loadComments.pending] : (state, action) => {
+      state.areCommentsLoading = true;
+      state.failedToLoadComments = false;
+    },
+    [loadComments.rejected] : (state, action) => {
+      state.areCommentsLoading = false;
+      state.failedToLoadComments = true;    },
     [loadComments.fulfilled] : (state, action) => {
       state.comments = action.payload[1].data.children.map((child)=> child.data)
-    }
+      state.areCommentsLoading = false;
+      state.failedToLoadComments = false;
+    },
+
   }}
 
 
 export const commentsSlice = createSlice(options);
 
-export const selectComments = state => state.comments;
+export const selectComments = state => state.comments.comments;
 
 export const {clearComments} = commentsSlice.actions
 

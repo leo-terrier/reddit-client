@@ -1,0 +1,11 @@
+#mainContainer {
+  display: flex;
+}
+
+#side {
+  width: 20%
+}
+
+.feedItemImg {
+  max-width: 100%;
+}

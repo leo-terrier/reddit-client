@@ -3,7 +3,7 @@ import {Comment} from '../comment/Comment.js'
 
 import {selectComments, loadComments} from './commentsSlice.js'
 
-export const Comments = ({feedItem}) => {
+export const Comments = () => {
   const comments = useSelector(selectComments);
 
   const displayComments = 
