@@ -13,7 +13,6 @@ export const FeedItem = ({feedItem, index}) => {
     if (!commentsClicked) {
       setCommentsClicked(true);
       const obj = {subreddit: feedItem.subreddit, id: feedItem.id}
-      ////Verify how to retreive ID
       dispatch(loadComments(obj))
     }else{
       setCommentsClicked(false);
@@ -29,8 +28,9 @@ export const FeedItem = ({feedItem, index}) => {
     }
 
     const date = () => {
-      const newDate = new Date(feedItem.created_utc)
-      return newDate.toUTCString()
+      const date = new Date(feedItem.created_utc*1000)
+      const newDate = date.toDateString()
+      return newDate
     }
 
 
@@ -42,7 +42,7 @@ export const FeedItem = ({feedItem, index}) => {
         <img className = "feedItemImg" src={isTherePicture()}/>
       </div>
       <div className="infoContainer">
-        <p>{feedItem.author}</p>
+        <p className='author'>{feedItem.author}</p>
         <p>{date()}</p>
         <a className="comments" onClick={toggleComments}>{feedItem.num_comments} comment(s)</a>
       </div>

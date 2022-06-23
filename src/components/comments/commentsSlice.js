@@ -31,10 +31,12 @@ const options = {
     [loadComments.rejected] : (state, action) => {
       state.areCommentsLoading = false;
       state.failedToLoadComments = true;    },
+      
     [loadComments.fulfilled] : (state, action) => {
       state.comments = action.payload[1].data.children.map((child)=> child.data)
       state.areCommentsLoading = false;
       state.failedToLoadComments = false;
+      console.log(state.comments)
     },
 
   }}

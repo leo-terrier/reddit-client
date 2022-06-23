@@ -24,7 +24,8 @@ return (
     <div>
       <form onSubmit={handleSubmit}>
 
-        <input type="text" 
+        <input id="searchBox"
+        type="text" 
         value={searchTerm}
         onChange={handleChange}>
         </input>

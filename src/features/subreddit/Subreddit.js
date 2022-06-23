@@ -45,9 +45,9 @@ export function Subreddit() {
   
 
   return (
-    <div>
+    <div id="side">
       <h2>Subreddits</h2>
-      <ul id="side">{generateSubredditList}</ul>
+      <ul >{generateSubredditList}</ul>
     </div>)
     
 }

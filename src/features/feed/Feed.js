@@ -22,13 +22,6 @@ export const Feed = () => {
     console.log(feed)
   }, [dispatch] ); 
 
-  const generateFeed = feed.map((feedItem) => (
-        <li key={feedItem.id}>
-          <FeedItem feedItem={feedItem}/>
-          <Comments feedItem={feedItem}/>
-        </li>
-        )
-    )
   
 
   return (<ul>{feed.map((feedItem, index) => (
@@ -39,7 +32,6 @@ export const Feed = () => {
     )
 )}</ul>)
 
-/* return (<p>{generateFeed}</p>)
- */  
-
+ 
+///t3_viuw8r
 }

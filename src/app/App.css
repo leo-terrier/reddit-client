@@ -1,23 +1,27 @@
 #mainContainer {
   display: flex;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
 }
-
+#headerDiv {
+  margin-bottom: 40px;
+}
 #side {
-  width: 20%
+  width: 20%;
+  margin: 25px;
+  padding: 15px;
 }
 
 .feedItemImg {
   max-width: 100%;
 }
 
-#headerDiv {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
 
 #searchButtonImg {
   max-width: 100%;
+  cursor: pointer;
 }
 #searchButton {
   width: 40px;
@@ -26,10 +30,11 @@
 
 form {
   display: flex;
+  justify-content: space-around;
 }
 
 #logo {
-  width: 50px
+  max-width: 75px;
 }
 
 .comments {
@@ -42,4 +47,75 @@ form {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+#headerSubDiv{
+  display: flex;
+  margin: 20px;
+  height: 80px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+#searchBox {
+  width: 90%;
+  margin-right: 10px;
+}
+
+form {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2em;
+  margin: 10px;
+}
+
+li {
+  list-style: none;
+}
+
+ #side li {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#side ul {
+  padding: 15px;
+  border-style: dashed;
+
+}
+
+ul {padding: 0}
+
+@media only screen and (max-width: 996px) {
+  #mainContainer {
+    display: flex;
+    flex-direction: column-reverse ;
+    align-items: center;
+  }
+  #headerDiv {
+    margin-bottom: 5px;
+  }
+  #side {
+    position : relative;
+    top: 0;
+    width: 80%;
+    margin: 0;
+  }
+  #side li {
+    display: inline-block;
+    margin: 8px;
+  }
+}
+
+.author {
+  font-style: italic;
 }

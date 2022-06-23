@@ -1,13 +1,14 @@
 import { useSelector } from 'react-redux'
 import {Comment} from '../comment/Comment.js'
+import {selectFeed} from '../../features/feed/feedSlice.js';
 
 import {selectComments, loadComments} from './commentsSlice.js'
 
-export const Comments = () => {
+export const Comments = ({feedItem}) => {
   const comments = useSelector(selectComments);
 
-  const displayComments = 
-    comments.map((comment, index) => <Comment index={index} comment={comment}/>)
+  const displayComments = comments.map((comment, index) => <Comment index={index} comment={comment} feedItem={feedItem}/>) 
+
 
     return <ul> {displayComments}</ul>
 }
