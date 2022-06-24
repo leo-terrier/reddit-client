@@ -1,11 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
 export const loadComments = createAsyncThunk(
   'comments/loadComments',
   async (obj) => {
     const data = await fetch(`https://www.reddit.com/r/${obj.subreddit}/${obj.id}.json`);
     const json = await data.json();
-    return json;
+    const arr = [obj.id, json];
+    return arr;
   }
 );
 
@@ -15,12 +16,14 @@ const options = {
   initialState:{
     areCommentsLoading: false,
     failedToLoadComments: false,
-    comments: []
+    commentsByArticleId: {},
+    articlesClicked: []
   },
   reducers : {
-    clearComments : (state) => {
-      state.comments = []
-    }
+    toggleClickedArticleList: (state, action) => {
+      const newArray = state.articlesClicked.includes(action.payload) ? state.articlesClicked.filter((article) => article!==action.payload) : [...state.articlesClicked, action.payload]
+      state.articlesClicked = newArray
+     }
 
   }, 
   extraReducers: {
@@ -33,20 +36,31 @@ const options = {
       state.failedToLoadComments = true;    },
       
     [loadComments.fulfilled] : (state, action) => {
-      state.comments = action.payload[1].data.children.map((child)=> child.data)
+      state.commentsByArticleId[action.payload[0]] = action.payload[1][1].data.children.map((child)=> child.data)
       state.areCommentsLoading = false;
       state.failedToLoadComments = false;
-      console.log(state.comments)
     },
 
   }}
 
+  export const togglingAndLoading = (payload) => {
+    return (dispatch) => {
+      dispatch(toggleClickedArticleList(payload.id));
+      if (payload.isAlreadyFetched===false) {
+        dispatch(loadComments(payload.obj))
+      }
+      }
+  }
+
+
 
 export const commentsSlice = createSlice(options);
 
-export const selectComments = state => state.comments.comments;
+export const articlesClicked = state => state.comments.articlesClicked;
 
-export const {clearComments} = commentsSlice.actions
+export const comments = state => state.comments.commentsByArticleId;
+
+export const {toggleClickedArticleList} = commentsSlice.actions
 
 export default commentsSlice.reducer
 
