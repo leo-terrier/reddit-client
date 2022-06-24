@@ -1,11 +1,20 @@
 # Reddit Client app
 
 Sort of replica of a few features of reddit : 
-*One can browse content through search bar
-*Pre-selected subreddit allow for browsing specific content
+- One can browse content through search bar
+- Or use pre-selected subreddit for browsing specific content
 
-Ideas to improve (if possible): 
-*Styling
-*Increase the amount of data retreived from API and displayed, and add pagination
-*Retreive message thread
+Tech stack: 
+- React
+- Redux & Redux toolkit
+
+Ideas to improve the app: 
+- adding testing
+- Styling more
+- Adding routing
+- Adding loading phases
+- Storing subreddit data (comments already stored) to improve speed
+- Adding self refreshment at specific intervals (10 min)
+- retreive comments threads
+- publish on github pages / or Netlify
 (...)

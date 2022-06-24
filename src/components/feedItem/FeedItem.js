@@ -1,28 +1,20 @@
-import {togglingAndLoading, articlesClicked, comments} from '../comments/commentsSlice.js'
+import {articlesClicked, comments, toggleClickedArticleList, loadComments} from '../comments/commentsSlice.js'
 import { useDispatch, useSelector } from 'react-redux';
-import { clearComments } from '../comments/commentsSlice.js';
 
-export const FeedItem = ({feedItem, index}) => {
+export const FeedItem = ({feedItem}) => {
 
   const dispatch = useDispatch()
 
-  const articlesThatAreClicked = useSelector(articlesClicked); 
   const commentaires = useSelector(comments);
 
 
-  const thunkObj = {
-    isAlreadyFetched: commentaires[feedItem.id] !== undefined,
-    id:feedItem.id,
-    obj: {subreddit: feedItem.subreddit, id: feedItem.id }
-  }
-
-  const thunk = () => {
-    dispatch(togglingAndLoading(thunkObj))
-    console.log(articlesThatAreClicked)
-    console.log(commentaires)
+  const toggleAndLoad = () => {
+    dispatch(toggleClickedArticleList(feedItem.id));
+      if (commentaires[feedItem.id] === undefined) {
+        dispatch(loadComments({subreddit: feedItem.subreddit, id: feedItem.id }))   
     }
+  }
   
-
   const isTherePicture = () => {
     const formats = ['.jpg', '.jpeg' , '.jfif' , '.pjpeg' , '.pjp', '.png', 	'.svg', '.webp'];
     if (formats.find((format) => feedItem.url.includes(format))) {
@@ -47,7 +39,7 @@ export const FeedItem = ({feedItem, index}) => {
       <div className="infoContainer">
         <p className='author'>{feedItem.author}</p>
         <p>{date()}</p>
-        <a className="comments" onClick={thunk}>{feedItem.num_comments} comment(s)</a>
+        <a className="comments" onClick={toggleAndLoad}>{feedItem.num_comments} comment(s)</a>
       </div>
       </div>
   )

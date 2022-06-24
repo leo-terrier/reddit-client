@@ -43,16 +43,6 @@ const options = {
 
   }}
 
-  export const togglingAndLoading = (payload) => {
-    return (dispatch) => {
-      dispatch(toggleClickedArticleList(payload.id));
-      if (payload.isAlreadyFetched===false) {
-        dispatch(loadComments(payload.obj))
-      }
-      }
-  }
-
-
 
 export const commentsSlice = createSlice(options);
 
